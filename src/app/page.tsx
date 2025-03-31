@@ -1,12 +1,13 @@
-import { getProjects } from "@/utils/api";
+import { projectAPI } from "@/utils/api";
 import { ProjectsGrid } from "../components/projects-grid";
 import styles from "./page.module.css";
+
 export const preload = () => {
-  void getProjects();
+  void projectAPI.all();
 };
+
 export default async function Home() {
-  const projects = await getProjects();
-  console.log("debug", projects);
+  const projects = await projectAPI.all();
   return (
     <main className={styles.main}>
       <ProjectsGrid projects={projects.projects} />

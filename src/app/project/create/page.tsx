@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default function Page() {
   const onSubmit = async (project: ProjectI) => {
-    console.log('debug', project);
     try {
       projectAPI.create({ title: project.title, description: project.description });
     }
