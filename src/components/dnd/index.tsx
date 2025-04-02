@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { TicketI } from "../forms/ticket.form";
 import DNDGrid from "./dnd-grid";
 import { ticketAPI } from "@/utils/api";
+import { notifications } from "@mantine/notifications";
 
 export type ColumnI = {
   items: TicketI[];
@@ -47,6 +48,13 @@ const DnD: React.FC<{
       updatedTicket.status_id = target.id;
       await ticketAPI.update({ ticket: updatedTicket, ticketId: updatedTicket.id });
     } catch (error) {
+      notifications.cleanQueue();
+      notifications.show({
+        color: "red",
+        position: "top-right",
+        title: `Unable to move "${ticket.title}"`,
+        message: `to "${target.name}" status.`,
+      })
       console.error(error);
     }
   }
