@@ -7,7 +7,7 @@ export type TicketI = {
   storyPoints: number;
   acceptanceCriteria: string;
   tags: string[];
-  id: string;
+  id: number;
   status_id: number;
 }
 type TicketFormI = {
