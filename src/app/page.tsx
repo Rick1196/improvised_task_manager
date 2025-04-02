@@ -8,6 +8,7 @@ export const preload = () => {
 
 export default async function Home() {
   const projects = await projectAPI.all();
+  console.log("debug", projects)
   return (
     <main className={styles.main}>
       <ProjectsGrid projects={projects.projects} />

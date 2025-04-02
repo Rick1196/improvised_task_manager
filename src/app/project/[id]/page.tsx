@@ -1,9 +1,9 @@
 import DnD from "@/components/dnd";
-import { projectAPI, ticketAPI } from "@/utils/api";
+import { projectAPI } from "@/utils/api";
 import Link from "next/link";
 
 export const preload = (id: number) => {
-  void ticketAPI.all({ projectId: id });
+  void projectAPI.allTickets({ projectId: id });
   void projectAPI.getStatuses({ projectId: id });
 };
 
@@ -13,7 +13,7 @@ export default async function Project({
   params: Promise<{ id: number }>;
 }) {
   const id = (await params).id;
-  const tickets = await ticketAPI.all({ projectId: id });
+  const tickets = await projectAPI.allTickets({ projectId: id });
   const statuses = await projectAPI.getStatuses({ projectId: id });
   return (
     <div>

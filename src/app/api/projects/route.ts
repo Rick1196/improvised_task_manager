@@ -1,3 +1,4 @@
+import { entitiesNames } from "@/utils/constant";
 import { createClient } from "@/utils/supabase/server";
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
@@ -13,7 +14,7 @@ export async function POST(req: NextRequest) {
   const { title, description } = body;
   const supabase = await createClient();
   try {
-    await supabase.from("projects").insert({ title, description });
+    await supabase.from(entitiesNames.project).insert({ title, description });
     return Response.json({ message: `Project ${title} created successfully` }, { status: 200 });
 
   } catch (error) {

@@ -4,15 +4,11 @@ import { TicketI } from "@/components/forms/ticket.form";
 
 
 const ticketAPI = {
-  all: async ({ projectId }: { projectId: number }) => {
-    const dataP = await fetch(`${apiURL}/api/tickets/${projectId}`, {
-      method: "GET",
-    });
-    const data = await dataP.json();
-    return data;
-  },
   create: async ({ ticket, projectId }: { ticket: TicketI, projectId: number }) => axios.post(`${apiURL}/api/tickets/`, {
     body: { ticket, projectId }
+  }),
+  update: async ({ ticket, ticketId }: { ticket: TicketI, ticketId: number }) => axios.put(`${apiURL}/api/tickets/${ticketId}`, {
+    body: { ticket }
   })
 }
 
