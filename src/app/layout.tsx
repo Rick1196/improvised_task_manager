@@ -30,8 +30,10 @@ const theme = createTheme({
 
 export default function RootLayout({
   children,
+  project
 }: Readonly<{
   children: React.ReactNode;
+  project: React.ReactNode;
 }>) {
   return (
     <html lang="en"  {...mantineHtmlProps}>
@@ -43,6 +45,7 @@ export default function RootLayout({
           <Notifications />
           <Header />
           {children}
+          {project}
         </></MantineProvider>
       </body>
     </html>
