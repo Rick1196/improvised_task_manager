@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { TicketI } from "../forms/ticket.form";
-import DNDGrid from "./dnd-grid";
 import { ticketAPI } from "@/utils/api";
 import { notifications } from "@mantine/notifications";
 import { usePathname, useRouter } from "next/navigation";
+import { type TicketI } from "@/components/forms/ticket.form";
+import DNDGrid from "@/components/dnd/dnd-grid";
 
 export type ColumnI = {
   items: TicketI[];
@@ -34,7 +34,7 @@ const orderTicketsByStatus = ({
   return columns;
 };
 
-const DnD: React.FC<{
+const TicketsGrid: React.FC<{
   tickets: TicketI[];
   statuses: StatusI[];
 }> = ({ tickets, statuses }) => {
@@ -45,7 +45,6 @@ const DnD: React.FC<{
   );
 
   const onMove = async ({ ticket, target }: { ticket: TicketI, target: ColumnI }) => {
-    console.log("debug on move", ticket, target);
     try {
       const updatedTicket = Object.assign({}, ticket);
       updatedTicket.status_id = target.id;
@@ -71,4 +70,4 @@ const DnD: React.FC<{
   ) : null;
 };
 
-export default DnD;
+export default TicketsGrid;
