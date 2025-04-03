@@ -10,6 +10,7 @@ import classes from './DndList.module.css';
 type DNDGridProps = {
   columns: ColumnI[],
   onMove: (ticket: TicketI, target: ColumnI) => void;
+  onTicketClick: (ticket: TicketI) => void;
 };
 
 const reorder = (
@@ -43,7 +44,7 @@ const move = (
 };
 
 
-const DNDGrid: React.FC<DNDGridProps> = ({ columns, onMove }) => {
+const DNDGrid: React.FC<DNDGridProps> = ({ columns, onMove, onTicketClick }) => {
   const [columnsState, setColumnsState] = useState(columns);
   const onDragEnd = (result: DropResult<string>) => {
     const { source, destination } = result;
@@ -69,7 +70,6 @@ const DNDGrid: React.FC<DNDGridProps> = ({ columns, onMove }) => {
       const newState = [...columnsState];
       newState[sInd].items = result[sInd];
       newState[dInd].items = result[dInd];
-      console.log("debug", columnsState, result, newState);
       setColumnsState(newState);
     }
   };
@@ -97,7 +97,7 @@ const DNDGrid: React.FC<DNDGridProps> = ({ columns, onMove }) => {
                   >
                     {(provided, snapshot) => (
                       <div
-                        onClick={() => console.log("open modal")}
+                        onClick={() => onTicketClick(item)}
                         ref={provided.innerRef}
                         className={cx(classes.item, {
                           [classes.itemDragging]: snapshot.isDragging,

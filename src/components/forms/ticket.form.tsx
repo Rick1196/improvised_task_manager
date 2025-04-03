@@ -13,10 +13,12 @@ export type TicketI = {
 type TicketFormI = {
   onSubmit: (ticketData: TicketI) => void;
   initialValue?: TicketI;
-  actionText?: string
+  actionText?: string;
+  readonly?: boolean;
 }
-const TicketForm: React.FC<TicketFormI> = ({ onSubmit, initialValue, actionText = "Submit" }) => {
 
+const TicketForm: React.FC<TicketFormI> = ({ onSubmit, initialValue, actionText = "Submit", readonly = false }) => {
+  console.log(initialValue)
   const {
     register,
     handleSubmit,
@@ -28,19 +30,19 @@ const TicketForm: React.FC<TicketFormI> = ({ onSubmit, initialValue, actionText 
   return <form onSubmit={handleSubmit(handleOnSubmit)}>
     <label>
       Title
-      <Input {...register("title", { required: true })} />
+      <Input {...register("title", { required: true, disabled: readonly })} />
     </label>
     <label>
       Description
-      <Textarea {...register("description", { required: true })} />
+      <Textarea {...register("description", { required: true, disabled: readonly })} />
     </label>
     <label>
       Acceptance Criteria
-      <Textarea {...register("acceptanceCriteria", { required: true })} />
+      <Textarea {...register("acceptanceCriteria", { required: true, disabled: readonly })} />
     </label>
     <label>
       Story points
-      <Input type="number"  {...register("storyPoints", { required: true, pattern: /^[1-9]+$/i, max: 5 })} />
+      <Input type="number"  {...register("storyPoints", { required: true, pattern: /^[1-9]+$/i, max: 5, disabled: readonly })} />
     </label>
     <Controller
       name='tags'
@@ -51,13 +53,15 @@ const TicketForm: React.FC<TicketFormI> = ({ onSubmit, initialValue, actionText 
       render={({ field: { onChange, value } }) => {
         return <label>
           Tags
-          <TagsInput onChange={(tags) => onChange(tags)} value={value} />
+          <TagsInput onChange={(tags) => onChange(tags)} value={value} disabled={readonly} />
         </label>
 
       }}
 
     />
-    <button type='submit'>{actionText}</button>
+    {
+      !readonly && <button type='submit'>{actionText}</button>
+    }
   </form>
 }
 export default TicketForm;
