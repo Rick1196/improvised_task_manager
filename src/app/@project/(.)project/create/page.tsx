@@ -1,14 +1,5 @@
-"use client";
-import ProjectForm from "@/components/forms/project.form";
-import CreateProject from "@/views/project/create";
-import { Modal } from "@mantine/core";
-import { useRouter } from "next/navigation";
+import CreateProjectModal from "@/views/modal/project/create";
 
 export default function Page() {
-  const router = useRouter();
-  return (
-    <Modal opened onClose={() => router.back()}>
-      <CreateProject />
-    </Modal>
-  );
+  return <CreateProjectModal />;
 }

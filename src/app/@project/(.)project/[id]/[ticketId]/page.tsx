@@ -1,5 +1,5 @@
 import { ticketAPI } from "@/utils/api";
-import TicketDatails from "@/views/ticket/ticket-details";
+import TicketDetailsModal from "@/views/modal/ticket/details";
 import Link from "next/link";
 
 export function preload(id: number) {
@@ -18,7 +18,6 @@ export default async function Page({
   const ticket = await ticketAPI.get({ ticketId });
 
   return <div>
-    <Link href={`/project/${projectId}`}>Back</Link>
-    <TicketDatails ticketData={{ ...ticket, acceptanceCriteria: ticket.acceptance_criteria, storyPoints: ticket.story_points }} />
+    <TicketDetailsModal ticket={{ ...ticket, acceptanceCriteria: ticket.acceptance_criteria, storyPoints: ticket.story_points }} />
   </div>
 }
