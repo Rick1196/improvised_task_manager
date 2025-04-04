@@ -1,3 +1,4 @@
+"use client"
 import CreateProject from "@/views/project/create";
 import Link from "next/link";
 

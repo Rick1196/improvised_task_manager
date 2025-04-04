@@ -3,3 +3,19 @@
   flex-direction: column;
   gap: 8px;
 }
+
+.statusesContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 0.5rem;
+}
+
+.buttonContainer{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
