@@ -16,3 +16,17 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     return Response.json({ message: `Unable to update "${title}" ticket`, error: error }, { status: 500 });
   }
 }
+
+
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: number }> }) {
+  const id = (await params).id;
+  const supabase = await createClient();
+  try {
+    const ticket = await supabase.from(entitiesNames.tickets).select("id, title, description, acceptance_criteria, story_points").eq("id", id).single();
+    return Response.json(ticket, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return Response.json({ message: `Unable to fetch ticket with id ${id}.` }, { status: 404 });
+
+  }
+}
