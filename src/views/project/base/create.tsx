@@ -6,9 +6,10 @@ import { notifications } from "@mantine/notifications";
 const CreateProjectBase: React.FC = () => {
   const onSubmit = async (project: ProjectI) => {
     try {
-      projectAPI.create({
+      await projectAPI.create({
         title: project.title,
         description: project.description,
+        statuses: project.statuses
       });
       notifications.cleanQueue();
       notifications.show({

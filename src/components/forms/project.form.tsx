@@ -25,8 +25,8 @@ const schema = yup
       .array()
       .required()
       .min(2, "You need to add at least 2 ticket statuses")
-      .of(yup.string().required("Status name is required"))
       .max(8, "You can not add more than 8 statuses to your project.")
+      .of(yup.string().required("Status name is required"))
       .test("unique", "Statuses must be unique", (value) => {
         if (!value) return true; // handled by required
         const unique = new Set(value);
