@@ -1,5 +1,5 @@
 "use client"
-import CreateTicket from "@/views/ticket/create-ticket";
+import CreateTicketBase from "@/views/ticket/base/create";
 import { Modal } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
@@ -12,7 +12,7 @@ export default function CreateTicketModal({projectId}:CreateTicketProps) {
   
   return (
     <Modal opened onClose={() => router.back()}>
-      <CreateTicket projectId={projectId} />
+      <CreateTicketBase projectId={projectId} />
     </Modal>
   );
 }
