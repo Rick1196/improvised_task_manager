@@ -11,10 +11,12 @@ export async function GET(req: NextApiRequest, res: NextApiResponse<any>) {
 
 export async function POST(req: NextRequest) {
   const { body } = await req.json();
-  const { title, description } = body;
+  const { title, description, statuses } = body;
   const supabase = await createClient();
   try {
-    await supabase.from(entitiesNames.project).insert({ title, description });
+    const {data: projectData} = await supabase.from(entitiesNames.project).insert({ title, description }, {count: "exact"}).select();
+    const statusesRows = statuses.map((status) => ({name: status, description: status, project_id: projectData?.[0].id }))
+    await supabase.from(entitiesNames.statuses).insert(statusesRows);   
     return Response.json({ message: `Project ${title} created successfully` }, { status: 200 });
 
   } catch (error) {

@@ -9,7 +9,8 @@ const ticketAPI = {
   }),
   update: async ({ ticket, ticketId }: { ticket: TicketI, ticketId: number }) => axios.put(`${apiURL}/api/tickets/${ticketId}`, {
     body: { ticket }
-  })
+  }),
+  get: async ({ ticketId }: { ticketId: number }) => axios.get(`${apiURL}/api/tickets/${ticketId}`).then(response => response.data.data)
 }
 
 export default ticketAPI;

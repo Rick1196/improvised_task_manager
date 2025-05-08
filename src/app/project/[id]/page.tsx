@@ -1,5 +1,5 @@
-import DnD from "@/components/dnd";
 import { projectAPI } from "@/utils/api";
+import TicketsGrid from "@/views/project/tickets-grid";
 import Link from "next/link";
 
 export const preload = (id: number) => {
@@ -19,7 +19,7 @@ export default async function Project({
     <div>
       <Link href="/">Back</Link>
       <Link href={`/project/${id}/create-ticket`}>Create Ticket</Link>
-      <DnD tickets={tickets.tickets} statuses={statuses.statuses} />
+      <TicketsGrid tickets={tickets.tickets} statuses={statuses.statuses} />
     </div>
   );
 }

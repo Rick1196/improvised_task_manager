@@ -1,0 +1,23 @@
+import { ticketAPI } from "@/utils/api";
+import TicketDetailsModal from "@/views/modal/ticket/details";
+import Link from "next/link";
+
+export function preload(id: number) {
+  void ticketAPI.get({ ticketId: id });
+}
+
+export default async function Page({
+  params
+}: {
+  params: Promise<{ id: number, ticketId: number }>;
+
+}) {
+  const routeParams = await params;
+  const projectId = routeParams.id;
+  const ticketId = routeParams.ticketId;
+  const ticket = await ticketAPI.get({ ticketId });
+
+  return <div>
+    <TicketDetailsModal ticket={{ ...ticket, acceptanceCriteria: ticket.acceptance_criteria, storyPoints: ticket.story_points }} />
+  </div>
+}

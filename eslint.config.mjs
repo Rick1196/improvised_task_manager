@@ -11,6 +11,19 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    name: "custom-rules",
+    rules: {
+      "no-use-client-in-app": noUseClientInAppRule,
+    },
+  },
+
+  // Enable the custom rule with a warning
+  {
+    rules: {
+      "no-use-client-in-app": "warn",
+    },
+  },
 ];
 
 export default eslintConfig;
